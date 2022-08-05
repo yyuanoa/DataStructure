@@ -1,10 +1,3 @@
-
-// #define _CRTDBG_MAP_ALLOC
-// #include <stdlib.h>
-// #include <crtdbg.h>
-// #define NEW_WITH_MEMORY_LEAK_CHECKING new(_NORMAL_BLOCK, __FILE__, __LINE__)
-// #define new NEW_WITH_MEMORY_LEAK_CHECKING
-
 #include <iostream>
 
 using namespace std;
@@ -80,7 +73,6 @@ public:
             temp->setNextNode(node);
         }
         length += 1;
-        // delete(node);
     }
 
     void print()
@@ -116,6 +108,5 @@ int main()
     stack->print();
     delete(stack);
 
-    // _CrtDumpMemoryLeaks();
     return 0;
 }
