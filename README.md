@@ -54,7 +54,7 @@
 
 最后step=1//2=0，退出循环。
 
-## QuickSort
+### QuickSort
 
 ### 时间复杂度的空间复杂度
 
