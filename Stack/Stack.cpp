@@ -2,15 +2,16 @@
 
 using namespace std;
 
+template <class type>
 
 class Node
 {
 private:
-    int value;
-    Node* next = nullptr;
+    type value;
+    Node<type>* next = nullptr;
 
 public:
-    Node(int mval)
+    Node(type mval)
     {
         value = mval;
     }
@@ -20,7 +21,7 @@ public:
         next = node;
     }
 
-    int getValue()
+    type getValue()
     {
         return value;
     }
@@ -31,21 +32,22 @@ public:
     }
 };
 
+template <class type>
 class Stack
 {
 private:
-    Node* head = nullptr;
+    Node<type>* head = nullptr;
     int length = 0;
 
 public:
-    int pull()  // 弹出栈中元素
+    type pull()  // 弹出栈中元素
     {
         if(head == nullptr)
         {
             cout << "push from empty stack." << "\n";
             return -1;
         }
-        Node* temp = head;
+        Node<type>* temp = head;
         while(temp->getNextNode()->getNextNode() != nullptr)
         {
             temp = temp->getNextNode();
@@ -58,14 +60,14 @@ public:
 
     void push(int val)  // 压入栈中
     {
-        Node* node = new Node(val);
+        Node<type>* node = new Node<type>(val);
         if(head == nullptr)
         {
             head = node;
         }
         else
         {
-            Node* temp = head;
+            Node<type>* temp = head;
             while(temp->getNextNode() != nullptr)
             {
                 temp = temp->getNextNode();
@@ -77,7 +79,7 @@ public:
 
     void print()
     {
-        Node* temp = head;
+        Node<type>* temp = head;
         while(temp->getNextNode() != nullptr)
         {
             cout << temp->getValue() << " -> ";
@@ -94,19 +96,18 @@ public:
 
 int main()
 {
-    Stack *stack = new Stack;
+    Stack<char> stack;
 
-    stack->push(5);
-    stack->push(8);
-    stack->push(3);
-    stack->push(7);
+    stack.push('a');
+    stack.push('b');
+    stack.push('c');
+    stack.push('d');
 
-    stack->print();
+    stack.print();
 
-    cout << stack->pull() << "\n";
+    cout << stack.pull() << "\n";
 
-    stack->print();
-    delete(stack);
+    stack.print();
 
     return 0;
 }

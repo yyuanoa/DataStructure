@@ -4,14 +4,14 @@
 
 using namespace std;
 
-
+template<class type>
 class Node
 {
 private:
-    int value;
-    Node* next = nullptr;
+    type value;
+    Node<type>* next = nullptr;
 public:
-    Node(int val)
+    Node(type val)
     {
         value = val;
     }
@@ -21,7 +21,7 @@ public:
         next = node;
     }
 
-    int getValue()
+    type getValue()
     {
         return value;
     }
@@ -32,15 +32,16 @@ public:
     }
 };
 
+template<class type>
 class JosephRing
 {
 private:
-    Node* head = nullptr;
+    Node<type>* head = nullptr;
     int kill;  // 每当数到kill就kill掉
     int length = 0;
 
 public:
-    JosephRing(vector<int> nums, int k)
+    JosephRing(vector<type> nums, int k)
     {
         kill = k;
         for(int i=0; i<nums.size(); i++)
@@ -50,16 +51,16 @@ public:
 
     }
 
-    void addNextNode(int val, bool circle)
+    void addNextNode(type val, bool circle)
     {
-        Node* node = new Node(val);
+        Node<type>* node = new Node<type>(val);
         if(head == nullptr)
         {
             head = node;
         }
         else
         {
-            Node* cur = head;
+            Node<type>* cur = head;
             while(cur->getNextNode())
             {
                 cur = cur->getNextNode();
@@ -75,8 +76,8 @@ public:
 
     void start()
     {
-        Node* cur = head;
-        Node* parent = nullptr;
+        Node<type>* cur = head;
+        Node<type>* parent = nullptr;
         int k=1;
         while(true)
         {
@@ -103,10 +104,10 @@ public:
 
 int main()
 {
-    int kill = 7;
-    vector<int> nums = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17};
+    int kill = 3;
+    vector<char> nums = {'a', 'b', 'c', 'd', 'e'};
 
-    JosephRing ring(nums, kill);
+    JosephRing<char> ring(nums, kill);
 
     ring.start();
 

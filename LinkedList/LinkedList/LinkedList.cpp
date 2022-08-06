@@ -3,15 +3,15 @@
 
 using namespace std;
 
-
+template <class type>
 class Node
 {
 private:
-    int value;
-    Node* next = nullptr;
+    type value;
+    Node<type>* next = nullptr;
 
 public:
-    Node(int mval)
+    Node(type mval)
     {
         value = mval;
     }
@@ -21,7 +21,7 @@ public:
         next = node;
     }
 
-    int getValue()
+    type getValue()
     {
         return value;
     }
@@ -32,24 +32,25 @@ public:
     }
 };
 
+template<class type>
 class LinkedList
 {
 private:
-    Node* head = nullptr;
+    Node<type>* head = nullptr;
     int length = 0;
 
 public:
 
-    void addNextNode(int val)  // 向后增加一个节点
+    void addNextNode(type val)  // 向后增加一个节点
     {
-        Node* node = new Node(val);
+        Node<type>* node = new Node<type>(val);
         if (head == nullptr)
         {
             head = node;
         }
         else
         {
-            Node* temp = head;
+            Node<type>* temp = head;
             while (!(temp->getNextNode() == nullptr))
             {
                 temp = temp->getNextNode();
@@ -59,17 +60,9 @@ public:
         length += 1;
     }
 
-    void addNextNodes(vector<int> vals)  // 向后增加多个节点
-    {
-        for(int i=0; i<vals.size(); i++)
-        {
-            this->addNextNode(vals[i]);
-        }
-    }
-
     void addBeforeNode(int val)  // 向前增加一个节点
     {
-        Node* temp = new Node(val);
+        Node<type>* temp = new Node<type>(val);
         temp->setNextNode(head);
         head = temp;
         length += 1;
@@ -82,8 +75,8 @@ public:
             this->addNextNode(val);
             return;
         }
-        Node* node = new Node(val);
-        Node* temp = head;
+        Node<type>* node = new Node<type>(val);
+        Node<type>* temp = head;
         for(int i=0; i<index-1; i++)
         {
             temp = temp->getNextNode();
@@ -106,7 +99,7 @@ public:
             length -= 1;
             return;
         }
-        Node* temp = head;
+        Node<type>* temp = head;
         for(int i=0; i<index-1; i++){
             temp = temp->getNextNode();
         }
@@ -121,10 +114,10 @@ public:
         length -= 1;
     }
 
-    int findValue(int val)  // 查找节点，返回index，没有返回-1
+    type findValue(type val)  // 查找节点，返回index，没有返回-1
     {
         int index;
-        Node* temp = head;
+        Node<type>* temp = head;
         for(index=0; index<length; index++)
         {
             if(temp->getValue() == val)
@@ -138,7 +131,7 @@ public:
 
     void print()  // 打印链表
     {
-        Node* temp = head;
+        Node<type>* temp = head;
         while (!(temp->getNextNode() == nullptr))
         {
             cout << temp->getValue() << " -> ";
@@ -152,30 +145,18 @@ public:
         return length;
     }
 
-    void circular()  // 将链表首尾连接
-    {
-        Node* temp = head;
-        while(temp->getNextNode() != nullptr)
-        {
-            temp = temp->getNextNode();
-        }
-        temp->setNextNode(head);
-    }
-
 };
 
 int main()
 {
-    LinkedList *JosephRing = new LinkedList;
+    LinkedList<int> *JosephRing = new LinkedList<int>;
     int num = 7;  // 有7人参与约瑟夫环
     int kill = 3;  // 报3的人出局
     vector<int> nums = {};
     for(int i=0; i<num; i++)
     {
-        nums.push_back(i);
+        JosephRing->addNextNode(i);
     }
-    JosephRing->addNextNodes(nums);
-    // plist->circular();
 
     JosephRing->print();
     int k = 1;  // 从1开始报数
@@ -197,8 +178,7 @@ int main()
         index += 1;
     }
 
-
-    // plist->print();
+    delete JosephRing;
 
     return 0;
 }
