@@ -3,7 +3,6 @@
 using namespace std;
 
 template <class type>
-
 class Node
 {
 private:
