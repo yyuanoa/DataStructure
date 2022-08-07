@@ -130,12 +130,7 @@ public:
             return data;
         }
         StackNode* cur = head;
-        while(cur->getNextNode() && cur->getNextNode()->getNextNode())
-        /*
-        两个条件分别表示：
-        1. 栈中不止一个元素
-        2. 当前节点cur不是尾节点
-        */
+        while(cur->getNextNode()->getNextNode())  // 该条件表示：当前节点cur不是栈顶节点
         {
             cur = cur->getNextNode();
         }
@@ -213,7 +208,7 @@ public:
 
     void createTree()  // 将叶子节点组合为哈夫曼树
     {
-        while(leafNode.getLength()>1)
+        while(leafNode.getLength()>1)  // 当leafNode只剩一个节点时，这个节点就是根节点
         {
             TreeNode* left = leafNode.pop();  // 左子节点，值较小
             TreeNode* right = leafNode.pop();  // 右子节点，值较大
