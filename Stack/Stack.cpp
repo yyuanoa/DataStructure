@@ -46,14 +46,8 @@ public:
             cout << "push from empty stack." << "\n";
             return -1;
         }
-        Node<type>* temp = head;
-        while(temp->getNextNode()->getNextNode() != nullptr)
-        {
-            temp = temp->getNextNode();
-        }
-        int res = temp->getNextNode()->getValue();
-        length -= 1;
-        temp->setNextNode(nullptr);
+        int res = head->getValue();
+        head = head->getNextNode();
         return res;
     }
 
@@ -66,12 +60,8 @@ public:
         }
         else
         {
-            Node<type>* temp = head;
-            while(temp->getNextNode() != nullptr)
-            {
-                temp = temp->getNextNode();
-            }
-            temp->setNextNode(node);
+            node->setNextNode(head);
+            head = node;
         }
         length += 1;
     }
@@ -79,6 +69,7 @@ public:
     void print()
     {
         Node<type>* temp = head;
+        cout << "top: ";
         while(temp->getNextNode() != nullptr)
         {
             cout << temp->getValue() << " -> ";
