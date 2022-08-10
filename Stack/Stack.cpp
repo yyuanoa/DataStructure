@@ -39,7 +39,7 @@ private:
     int length = 0;
 
 public:
-    type pull()  // 弹出栈中元素
+    type pull()  // 弹出栈顶元素
     {
         if(head == nullptr)
         {
@@ -51,7 +51,7 @@ public:
         return res;
     }
 
-    void push(int val)  // 压入栈中
+    void push(int val)  // 压入栈顶
     {
         Node<type>* node = new Node<type>(val);
         if(head == nullptr)
