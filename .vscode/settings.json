@@ -24,6 +24,7 @@
         "system_error": "cpp",
         "typeinfo": "cpp",
         "string": "cpp",
-        "vector": "cpp"
+        "vector": "cpp",
+        "iostream": "cpp"
     }
 }
